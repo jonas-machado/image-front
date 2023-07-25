@@ -2,14 +2,15 @@
 
 import axios from "axios";
 import React, { useState } from "react";
+import Image from "next/image";
 
 export default function ImageForm() {
-  const [image, setImage] = useState<any>(null);
-  console.log(image);
+  const [image, setImage] = useState<any>();
   const onSubmit = () => {
     axios
-      .post("http://localhost:3002/api/compareImages", {
-        image_data: image,
+      .post("http://localhost:5000/processImage", {
+        imageUrl:
+          "https://global.cdn.magazord.com.br/edexjeans/img/2023/02/produto/7436/t-jaqueta-masculina-nylon-4105-variacao-37827-1-61263e0afaef09183d9d0328c3265499-20220427135503.jpeg?ims=fit-in/475x650",
       })
       .then((res) => console.log(res));
   };
@@ -48,7 +49,7 @@ export default function ImageForm() {
             id="dropzone-file"
             type="file"
             className="hidden"
-            onChange={(e) => setImage(e.target.files![0])}
+            onChange={(e) => setImage(URL.createObjectURL(e.target.files![0]))}
           />
         </label>
       </div>
@@ -58,6 +59,9 @@ export default function ImageForm() {
       >
         enviar
       </button>
+      <div>
+        <Image src={image} alt="firstImage" width={500} height={500} />
+      </div>
     </div>
   );
 }
