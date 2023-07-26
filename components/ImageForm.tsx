@@ -8,10 +8,14 @@ export default function ImageForm() {
   console.log(image);
   const onSubmit = () => {
     axios
-      .post("http://localhost:3002/api/compareImages", {
-        image_data: image,
+      .post("http://localhost:5000/processImage", {
+        imageUrl:
+          "https://artificialintelligence.oodles.io/wp-content/uploads/2020/05/Computer-Vision-for-eCommerce-Optimization.jpg",
+        imageUrl2:
+          "https://www.aismartz.com/blog/wp-content/uploads/2019/09/computer-vision.jpg",
       })
-      .then((res) => console.log(res));
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   return (
     <div className="h-screen">
@@ -48,7 +52,7 @@ export default function ImageForm() {
             id="dropzone-file"
             type="file"
             className="hidden"
-            onChange={(e) => setImage(e.target.files![0])}
+            onChange={(e) => setImage(URL.createObjectURL(e.target.files![0]))}
           />
         </label>
       </div>
@@ -58,6 +62,9 @@ export default function ImageForm() {
       >
         enviar
       </button>
+      <div>
+        <img src={image} alt="" />
+      </div>
     </div>
   );
 }

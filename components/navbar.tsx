@@ -63,7 +63,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
+      <div
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
@@ -166,7 +166,7 @@ export default function Navbar() {
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
-      </nav>
+      </div>
       <Dialog
         as="div"
         className="lg:hidden"
