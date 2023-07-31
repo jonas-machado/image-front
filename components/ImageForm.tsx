@@ -14,7 +14,8 @@ export default function ImageForm() {
   const [image2Url, setImage2Url] = useState<any>(null);
 
   const [result, setResult] = useState<any>("");
-
+  const [resultVision, setResultVision] = useState<any>("");
+  console.log(resultVision);
   const { handleSubmit, register } = useForm();
 
   console.log(result);
@@ -61,18 +62,28 @@ export default function ImageForm() {
       console.log(err)
     );
 
+    // axios
+    //   .post("http://localhost:5000/processImage", {
+    //     imageUrl: urlImage,
+    //     imageUrl2: urlImage2,
+    //   })
+    //   .then((res) => {
+    //     const similarity =
+    //       parseInt(res.data!["SSIM"]) > parseInt(res.data!["ORB"])
+    //         ? parseInt(res.data!["SSIM"])
+    //         : parseInt(res.data!["ORB"]);
+    //     console.log(res);
+    //     setResult(similarity);
+    //   })
+    //   .catch((err) => console.log(err));
     axios
-      .post("http://localhost:5000/processImage", {
+      .post("http://localhost:5000/processImageVision", {
         imageUrl: urlImage,
-        imageUrl2: urlImage2,
       })
       .then((res) => {
-        const similarity =
-          parseInt(res.data!["SSIM"]) > parseInt(res.data!["ORB"])
-            ? parseInt(res.data!["SSIM"])
-            : parseInt(res.data!["ORB"]);
-        console.log(res);
-        setResult(similarity);
+        const labels = res;
+        console.log(labels);
+        setResultVision(labels.data);
       })
       .catch((err) => console.log(err));
   };
@@ -180,7 +191,19 @@ export default function ImageForm() {
         </div>
       </form>
       <div className="flex justify-center w-full text-center my-6">
-        <p className=" text-2xl">{"Similarity: " + result + "%"}</p>
+        <table className="w-1/2 border border-gray-900 rounded-xl">
+          <tr>
+            <th className="text-4xl">Label</th>
+            <th className="text-4xl">Score</th>
+          </tr>
+          {resultVision &&
+            resultVision.map((label: any) => (
+              <tr>
+                <td>{label.label}</td>
+                <td>{Math.round(label.score * 100)}%</td>
+              </tr>
+            ))}
+        </table>
         {/* <p className=" text-2xl">{"SSIM: " + result.data!["SSIM"]! + "%"}</p> */}
       </div>
     </div>
