@@ -48,7 +48,7 @@ export default function ImageForm() {
     <div className="absolute top-1/2 -translate-y-1/2 w-full items-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-2 items-center gap-2 mx-2 h-auto w-full"
+        className="flex flex-col items-center gap-2 mx-2 h-auto w-full"
       >
         {!image ? (
           <label
@@ -92,7 +92,7 @@ export default function ImageForm() {
           </div>
         )}
 
-        <div className="flex gap-2 mx-2 col-span-2">
+        <div className="flex gap-2 mx-2 w-full">
           <button
             className="rounded-md bg-gray-900 text-gray-300 p-4 w-full text-2xl col-span-2"
             onClick={reset}
