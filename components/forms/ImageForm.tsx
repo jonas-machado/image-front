@@ -108,10 +108,15 @@ export default function ImageForm() {
           </button>
         </div>
       </form>
-      <div className="flex w-full my-6 h-1/2">
+      <div className="flex items-center justify-center w-full my-2 gap-2">
         {bucket?.map((el: any) => (
           <div key={el}>
-            <img src={`data:image/jpg;base64,${el}`} alt="image" />
+            <img
+              height={280}
+              width={280}
+              src={`data:image/jpg;base64,${el}`}
+              alt="image"
+            />
             <p></p>
           </div>
         ))}
