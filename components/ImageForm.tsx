@@ -4,17 +4,17 @@ import axios from "axios";
 import { v4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { storage } from "@/lib/firebase/firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function ImageForm() {
   const [image, setImage] = useState<any>(null);
   const [imageUrl, setImageUrl] = useState<any>(null);
 
+  const [bucket, setBucket] = useState<any>();
+  console.log(bucket);
+
   const [result, setResult] = useState<any>("");
   const { handleSubmit, register } = useForm();
 
-  console.log(result);
   const reset = () => {
     setImage(null);
     setResult("");
@@ -40,6 +40,7 @@ export default function ImageForm() {
         .post("http://localhost:5000/processImage", formData)
         .then((res) => {
           console.log(res);
+          setBucket(res.data["Images"]);
         })
         .catch((err) => console.log(err));
     }
@@ -107,7 +108,13 @@ export default function ImageForm() {
           </button>
         </div>
       </form>
-      <div className="flex justify-center w-full text-center my-6">
+      <div className="flex w-full my-6 h-1/2">
+        {bucket?.map((el: any) => (
+          <div key={el}>
+            <img src={`data:image/jpg;base64,${el}`} alt="image" />
+            <p></p>
+          </div>
+        ))}
         {/* <p className=" text-2xl">{"SSIM: " + result.data!["SSIM"]! + "%"}</p> */}
       </div>
     </div>
