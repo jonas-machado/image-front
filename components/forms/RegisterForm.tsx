@@ -42,6 +42,7 @@ export default function RegisterForm() {
           />
         </div>
         <Webcam width={400} height={400} />
+        <input type="file" accept="image/*" capture="environment" />
       </form>
     </div>
   );
