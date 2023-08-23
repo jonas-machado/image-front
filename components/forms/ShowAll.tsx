@@ -44,6 +44,7 @@ export default function ShowAll() {
     axios
       .post("http://localhost:5000/upload", formData)
       .then((res) => {
+        setToSend(false);
         console.log(res);
       })
       .catch((err) => {
