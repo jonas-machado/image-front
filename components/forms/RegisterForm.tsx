@@ -18,7 +18,14 @@ export default function RegisterForm() {
   //     };
   //   }, []);
 
-  const onSubmit = async () => {};
+  const onSubmit = async () => {
+    axios
+      .get("http://localhost:5000/register")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="flex justify-center items-center h-full">
@@ -41,8 +48,20 @@ export default function RegisterForm() {
             className="rounded-md p-2 w-full"
           />
         </div>
-        <Webcam width={400} height={400} />
-        <input type="file" accept="image/*" capture="environment" />
+        <label
+          htmlFor="image"
+          className="w-full bg-black rounded-md text-center cursor-pointer"
+        >
+          Escolher imagem
+          <input
+            className="hidden"
+            id="image"
+            type="file"
+            accept="image/*"
+            capture="environment"
+          />
+        </label>
+        <button className="w-full bg-black rounded-md">Enviar</button>
       </form>
     </div>
   );
