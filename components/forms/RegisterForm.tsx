@@ -52,32 +52,32 @@ export default function RegisterForm() {
         <input
           type="text"
           placeholder="Nome"
-          className="rounded-md p-2"
+          className="rounded-md p-2 text-black"
           {...register("name")}
         />
         <input
           type="text"
           placeholder="E-mail"
-          className="rounded-md p-2"
+          className="rounded-md p-2 text-black"
           {...register("email")}
         />
         <input
           type="text"
           placeholder="Instagram"
-          className="rounded-md p-2"
+          className="rounded-md p-2 text-black"
           {...register("instagram")}
         />
         <div className="flex flex-row gap-2 w-full">
           <input
             type="text"
             placeholder="País"
-            className="rounded-md p-2 w-14"
+            className="rounded-md p-2 w-14 text-black"
             {...register("country")}
           />
           <input
             type="text"
             placeholder="Telefone"
-            className="rounded-md p-2 w-full"
+            className="rounded-md p-2 w-full text-black"
             {...register("tel")}
           />
         </div>
