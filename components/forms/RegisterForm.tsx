@@ -7,35 +7,13 @@ import { FieldValues, useForm } from "react-hook-form";
 
 export default function RegisterForm() {
   const { handleSubmit, register } = useForm();
-  const [image, setImage] = useState<any>();
-  const [imageUrl, setImageUrl] = useState<any>();
-  console.log(imageUrl);
-  useEffect(() => {
-    if (image) {
-      setImageUrl(URL.createObjectURL(image));
-    }
-    return () => {
-      URL.revokeObjectURL(imageUrl);
-    };
-  }, [image]);
 
-  const onSubmit = async ({
-    name,
-    email,
-    instagram,
-    country,
-    tel,
-  }: FieldValues) => {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("instagram", instagram);
-    formData.append("country", country);
-    formData.append("tel", tel);
-    formData.append("image", image);
-
+  const onSubmit = async ({ email, password }: FieldValues) => {
     axios
-      .post("http://localhost:5000/reference", formData)
+      .post("http://localhost:5000/reference", {
+        email,
+        password,
+      })
       .then((res) => {
         console.log(res);
       })
