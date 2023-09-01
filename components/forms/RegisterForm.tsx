@@ -10,9 +10,9 @@ export default function RegisterForm() {
 
   const onSubmit = async ({ email, password }: FieldValues) => {
     axios
-      .post("http://localhost:5000/reference", {
-        email,
-        password,
+      .post("http://localhost:5000/register", {
+        email: email,
+        password: password,
       })
       .then((res) => {
         console.log(res);
@@ -24,7 +24,7 @@ export default function RegisterForm() {
     <div className="flex justify-center items-center h-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-black p-2 rounded-md flex flex-col gap-2 bg-opacity-60"
+        className="bg-black p-2 rounded-md flex flex-col gap-2 bg-opacity-60 w-1/5"
       >
         <input
           id="email"
@@ -36,7 +36,7 @@ export default function RegisterForm() {
         <input
           id="password"
           type="text"
-          placeholder="Nome"
+          placeholder="Senha"
           className="rounded-md p-2 text-black"
           {...register("password")}
         />
