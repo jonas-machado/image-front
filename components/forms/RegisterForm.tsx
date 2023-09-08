@@ -10,9 +10,8 @@ export default function RegisterForm() {
 
   const onSubmit = async ({ email, password }: FieldValues) => {
     axios
-      .post("http://localhost:5000/register", {
+      .post("http://localhost:5000/login", {
         email: email,
-        password: password,
       })
       .then((res) => {
         console.log(res);
@@ -32,13 +31,6 @@ export default function RegisterForm() {
           placeholder="E-mail"
           className="rounded-md p-2 text-black"
           {...register("email")}
-        />
-        <input
-          id="password"
-          type="text"
-          placeholder="Senha"
-          className="rounded-md p-2 text-black"
-          {...register("password")}
         />
         <button className="w-full bg-black rounded-md text-gray-200 p-2">
           Enviar
